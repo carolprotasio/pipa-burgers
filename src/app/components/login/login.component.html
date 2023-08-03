@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipa's Bugers</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.min.css">
+</head>
+<body>
+  <main class="container-login">
+    <div class="logo">
+      <img src="../../../../assets/logoPB.png" alt="">
+    </div>
+    <section class="loginInput">
+      <h2 class="textLogin">Boa vindas!! Faça seu login</h2>
+      <form class="formLogin" (submit)="login()">
+        <input type="email" name="email" [(ngModel)]="email" placeholder="seuemail@pb.com.br"><br>
+        <input type="password" name="pass" [(ngModel)]="password" placeholder="sua senha">
+        <p class="error-message">{{ errorMessage }}</p>
+        <button type="submit" class="btn-entry">Entrar</button>
+      </form>
+    </section>
+  </main>
+  <footer class="footerLogin">
+    <p class="foot">Desenvolvido por Carol Protásio</p>
+    <a href="https://github.com/carolprotasio" target="_blank" class="iconFoot">
+      <span class="icon"><i class="bi bi-github" style="font-size: 2em;"></i></span>
+    </a>    
+    <a href="https://www.linkedin.com/in/carol-protasio/" target="_blank" class="iconFoot">
+      <span class="icon"><i class="bi bi-linkedin" style="font-size: 2em;"></i></span>
+    </a>
+  </footer>
+</body>
+</html>

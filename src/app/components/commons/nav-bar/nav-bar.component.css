@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+body {    
+    background: url(../../../../assets/fm_light1.png) no-repeat top center;
+    background-size: cover;
+    background-attachment: fixed;
+    
+
+    height: 100vh;
+}
+.logo {    
+    height: 45px;
+}
+.text-logo {
+    margin-left: 40px;
+    color: #bcd3ee;
+    font-size: 20px;
+}
+.menu-lateral {
+    width: 100px;
+    height: 100%;
+    background-color: black;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0 0 #981313;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    overflow: hidden;
+    transition: .2s;
+}
+.menu-lateral:hover {
+    width:300px;
+}
+.btn-expandir {
+    width: 100%;
+    padding-left: 10px;
+    margin: 20px 0 100px 0;
+}
+.btn-expandir > i {    
+    color: #981313;
+    font-size: 35px;
+    cursor: pointer;
+}
+ul {
+    height: 100%;
+    list-style-type: none;
+    
+}
+ul li.item-list {
+    transition: .2s;
+}
+ul li.item-list:hover {
+    color: white;
+    background-color: #981313;   
+    
+}
+.item-list a:hover {
+    color: #bcd3ee;
+}
+.item-list a{
+    color: #981313;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 20px 4%;
+    display: flex;
+
+    line-height: 40px;
+    
+    margin-bottom: 20px; 
+
+}
+.text-link {
+    margin-left: 40px;
+}
+.icon > i {
+    font-size: 30px;
+    margin-left: 10px;
+}
+
+
+@media screen and (max-width: 1490px) {
+    .text-link {
+        margin-left: 51px;
+    }
+}
+@media (max-width: 767px) {
+    .menu-lateral {
+        width: 100%;
+        height: 100px; 
+        padding: 20px 0;
+        box-shadow: 3px 2px 5px #98131383;
+        position: fixed; 
+        border-bottom: 3px solid #981313;    
+    }
+ 
+    .item-list a {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .menu-lateral:hover {
+        width: 100%;
+    }
+    .logo {
+        margin-left: 15px;
+    }
+
+    .btn-expandir {
+        display: none;
+    }
+
+    ul {
+        display: flex;
+        justify-content:flex-end;
+        margin-left: 50%;
+        flex-wrap: nowrap;
+        padding: 10px;        
+    } 
+    ul li.item-list:hover,
+    ul li a:hover  {
+        color: #bcd3ee; 
+        background-color: transparent;        
+        
+    }
+    .text-link {
+        display: none;
+    }
+    .icon {
+       margin-left: 20px;
+       margin-top: -130%;
+    }
+}

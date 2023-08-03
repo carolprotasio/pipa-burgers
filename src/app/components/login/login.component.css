@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+body {
+    min-height: 100vh;
+    background-image: url(../../../assets/fm_light1.png);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.container-login{    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: auto;
+
+}
+.textLogin {
+    color: #103469;
+    padding: 10px;
+    text-shadow: 7px 7px 15px rgba(255, 255, 255, 0.705);
+    font-size: 1.6em;       
+}
+
+form input{
+    height: 45px;
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    
+    font-size: 1.1em;
+    background-color: rgba(240, 44, 44, 0.638);
+    color: #102a51;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+form  input::placeholder{
+    color: #3c485a;
+}
+.btn-entry {
+    text-decoration: none; 
+    margin-top: 10px;   
+   /*  height: 45px; */
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #001d48d9;
+    color: white;
+    font-size: 1.2em;
+    margin-top: 15px;
+    text-align: center; 
+    display: block; 
+    
+}
+.error-message {
+    color: #001d48d9;
+    background-color: rgba(236, 142, 142, 0.347);
+    margin-left: 10px;    
+    font-weight: bold;
+    font-size: 1.2em;
+    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.498);
+}
+.footerLogin {
+    background-color: rgba(0, 0, 0, 0.396);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 7%;
+}
+footer p {
+    letter-spacing: 1.2px;
+    font-size: 1.1em;
+    margin-top: 8px;
+}
+
+.foot {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.iconFoot {
+    margin: 10px;
+}
+
+.icon {
+    color: white;
+    font-size: 15px;
+
+}
+
+/* Media query para telas menores que 768px (dispositivos móveis) */
+@media (max-width: 767px) {
+    form input,
+    a.btn-entry {
+        width: 90%;
+    }
+    .logo img {
+        max-width: 300px; /* Ajuste o valor conforme necessário para diminuir o tamanho do logo */
+    }
+    footer p {
+        letter-spacing: 1.2px;
+        font-size: 0.8em;
+        margin-top: 8px;
+    }
+    .icon {
+        color: white;
+        font-size: 10px;
+    
+    }
+    
+}
+
