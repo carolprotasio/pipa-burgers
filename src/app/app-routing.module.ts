@@ -1,19 +1,42 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginModule } from './components/login/login.module';
-import { HomeModule } from './components/home/home.module';
 
+import { LoginModule } from './components/login/login.module';
+import { ChefModule } from './components/chef/chef.module';
+import { AdminModule } from './components/admin/admin.module';
+import { WaiterModule } from './components/waiter/waiter.module';
+
+import { LoginComponent } from './components/login/login.component';
+import { WaiterComponent } from './components/waiter/waiter.component';
 
 const routes: Routes = [
   {
+    path: 'login', 
+    component: LoginComponent 
+  },
+  {
+    path: 'waiter', 
+    component: WaiterComponent 
+  },
+  {
     path: '',
-    loadChildren: () => import('./components/home/home.module').then( m => HomeModule)
+    loadChildren: () => import('./components/login/login.module').then( m => LoginModule)
+  },
+  {
+    path: 'chef',
+    loadChildren: () => import('./components/chef/chef.module').then( m => ChefModule)
 
   },
   {
-    path: 'logar',
-    loadChildren: () => import('./components/login/login.module').then( m => LoginModule)
+    path: 'admin',
+    loadChildren: () => import('./components/admin/admin.module').then( m => AdminModule)
+
   },
+  {
+    path: 'waiter',
+    loadChildren: () => import('./components/waiter/waiter.module').then( m => WaiterModule)
+
+  }
 
 ];
 

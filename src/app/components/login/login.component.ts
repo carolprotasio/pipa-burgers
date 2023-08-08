@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './../../service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,22 +12,34 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  login() {
-    
-    const admEmail = 'admin@example.com';
-    const admPassword = '123456';
+  constructor(private router: Router, private authService: AuthService) {}
 
-    if (this.email === admEmail && this.password === admPassword) {
-      console.log('Login com sucesso');
-      // Aqui você pode redirecionar para a página do respectivo usuário (adm / chef / atendente)
-      // Exemplo: this.router.navigate(['/adm']) ou this.router.navigate(['/chef']) ou this.router.navigate(['/atendente'])
-    } else {
-      console.error('Email ou senha inválidos');
-      this.errorMessage = 'Email ou senha inválidos. Tente de novo!';
-
+  async login() {
+    try {
+      const success = await this.authService.login(this.email, this.password);
+      
+      if (success) {
+        const userEmail = this.authService.getUserEmail();
+        switch (userEmail) {
+          case 'admin@pb.com':
+            this.router.navigate(['/admin']);
+            break;
+          case 'chef@pb.com':
+            this.router.navigate(['/chef']);
+            break;
+          case 'waiter@pb.com':
+            this.router.navigate(['/waiter']);
+            break;
+          default:
+            this.router.navigate(['']);
+            break;
+        }
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+      this.errorMessage = 'Erro ao fazer login. Por favor, tente novamente.';
       this.email = '';
       this.password = '';
     }
   }
 }
-

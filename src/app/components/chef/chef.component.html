@@ -1,0 +1,60 @@
+<!-- <app-nav-bar></app-nav-bar>  -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipa's Bugers</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="menu-lateral">
+        <div>
+            <img src="../../../assets/burguer1.png" alt="logo" class="logo">
+            
+        </div>
+        <div class="btn-expandir">
+            <!-- <i class="bi bi-list"></i> -->
+        </div>
+        <ul>          
+            <li class="item-list">
+                <a href="#">
+                    <span class="icon"><i class="bi bi-stopwatch"></i></span>
+                    <span class="text-link">Pedidos em espera</span>
+                </a>
+            </li>
+            <li class="item-list">
+                <a href="#">
+                    <span class="icon"><i class="bi bi-check-circle"></i></span>
+                    <span class="text-link">Pedidos finalizados</span>
+                </a>
+            </li>
+            <li class="item-list">
+                <a (click)="logout()">
+                    <span class="icon"><i class="bi bi-box-arrow-left"></i></span>
+                    <span class="text-link">Sair</span>
+                </a>
+            </li>
+        </ul>
+    </nav> 
+    <main>
+    
+        <div>
+            <img src="../../../assets/logoPB.png" alt="Logo" class="logoPb">
+        </div>
+        <section class="mainSection">
+            <h2 class="mainText">Pedidos em Espera</h2>            
+            <div class="waitOrders">
+            <!-- Aqui virá o componente -->
+            </div>            
+            <h2 class="mainText green">Pedidos Finalizados</h2>            
+            <div class="waitBox">
+            <!-- Aqui virá o componente -->
+            </div>
+        </section>
+    </main> 
+    
+</body>
+</html>
+

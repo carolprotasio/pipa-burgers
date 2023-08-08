@@ -1,19 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
-/* body {    
-    background: url(../../../../assets/fm_light1.png) no-repeat top center;
-    background-size: cover;
-    background-attachment: fixed;
-    
 
-    height: 100vh;
-} */
+/* -------PARTE DA NAV------- */
 .logo {    
     height: 45px;
 }
@@ -35,6 +28,8 @@
     
     overflow: hidden;
     transition: .2s;
+    z-index: 2;;
+    
 }
 .menu-lateral:hover {
     width:300px;
@@ -85,6 +80,7 @@ ul li.item-list:hover {
     margin-left: 10px;
 }
 
+/*---------MEDIAS QUERIES----------*/
 
 @media screen and (max-width: 1490px) {
     .text-link {
@@ -99,6 +95,17 @@ ul li.item-list:hover {
         box-shadow: 3px 2px 5px #98131383;
         position: fixed; 
         border-bottom: 3px solid #981313;    
+    }
+    .logoPb {
+        width: 200px;
+        margin-top: 8%;
+    }
+    .mainText {
+        margin-bottom: 40px; 
+    }
+
+    .mainSection {
+        margin-top: 40px; 
     }
  
     .item-list a {
