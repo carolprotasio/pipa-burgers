@@ -12,9 +12,9 @@
       <img src="../../../../assets/logoPB.png" alt="">
     </div>
     <section class="loginInput">
-      <h2 class="textLogin">Boa vindas!! Faça seu login</h2>
+      <h2 class="textLogin">Boas vindas!! Faça seu login</h2>
       <form class="formLogin" (submit)="login()">
-        <input type="email" name="email" [(ngModel)]="email" placeholder="seuemail@pb.com.br"><br>
+        <input type="email" name="email" [(ngModel)]="email" placeholder="seuemail@pb.com"><br>
         <input type="password" name="pass" [(ngModel)]="password" placeholder="sua senha">
         <p class="error-message">{{ errorMessage }}</p>
         <button type="submit" class="btn-entry">Entrar</button>
