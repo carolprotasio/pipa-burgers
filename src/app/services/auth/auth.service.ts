@@ -20,6 +20,7 @@ export class AuthService {
       if (response.accessToken) {
         localStorage.setItem('token', response.accessToken);
         localStorage.setItem('userEmail', email);
+        localStorage.setItem('user', JSON.stringify(response.user));
         return true;
       } else {
         throw new Error('Login inválido');
@@ -38,6 +39,10 @@ export class AuthService {
   // pegar o email do usuário logado
   getUserEmail(): string | null { //indicar que um determinado valor ou variável pode ser de mais de um tipo.
     return localStorage.getItem('userEmail');
+  }
+  getUserData(): any | null { 
+    const user: any | null = localStorage.getItem('user');
+    return JSON.parse(user);
   }
 
   // Armazenar o token no localStorage se efetuar login com sucesso

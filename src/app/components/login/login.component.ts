@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from './../../service/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,17 +17,18 @@ export class LoginComponent {
   async login() {
     try {
       const success = await this.authService.login(this.email, this.password);
-      
-      if (success) {
-        const userEmail = this.authService.getUserEmail();
-        switch (userEmail) {
-          case 'admin@pb.com':
+      console.log(success)
+      if (success) {        
+        const user = this.authService.getUserData();
+        console.log(user)
+        switch (user.role) {
+          case 'admin':
             this.router.navigate(['/admin']);
             break;
-          case 'chef@pb.com':
+          case 'chef':
             this.router.navigate(['/chef']);
             break;
-          case 'waiter@pb.com':
+          case 'atendente':
             this.router.navigate(['/waiter']);
             break;
           default:

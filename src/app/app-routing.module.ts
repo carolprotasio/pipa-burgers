@@ -5,6 +5,7 @@ import { LoginModule } from './components/login/login.module';
 import { ChefModule } from './components/chef/chef.module';
 import { AdminModule } from './components/admin/admin.module';
 import { WaiterModule } from './components/waiter/waiter.module';
+import { MenuModule } from './components/menu/menu.module';
 
 import { LoginComponent } from './components/login/login.component';
 import { WaiterComponent } from './components/waiter/waiter.component';
@@ -35,6 +36,11 @@ const routes: Routes = [
   {
     path: 'waiter',
     loadChildren: () => import('./components/waiter/waiter.module').then( m => WaiterModule)
+
+  },
+  {
+    path: 'menu',
+    loadChildren: () => import('./components/menu/menu.module').then( m => MenuModule)
 
   }
 

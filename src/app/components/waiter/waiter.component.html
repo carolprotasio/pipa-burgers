@@ -29,4 +29,43 @@
         </li>
     </ul>
 </nav> 
+<section class="menuSection">
+    <div>
+            <img src="../../../assets/logoPB.png" alt="logo" class="logoPb">
+            
+    </div>
+    <span class="menuTitle">Menu</span>
+     <div class="menuChoice">
+      <button (click)="filterProductsByType('café da manhã')" [ngClass]="{'active': productType === 'café da manhã'}" class="btn-breakfast">Café da manhã</button>
+      <button (click)="filterProductsByType('lanches')" [ngClass]="{'active': productType === 'lanches'}" class="btn-snack">Lanches</button>
+      <button (click)="filterProductsByType('bebidas')" [ngClass]="{'active': productType === 'bebidas'}" class="btn-drinks">Bebidas</button>
+    </div> 
+      
+    <div *ngFor="let product of filterProducts" class="menuAll">
+      <div class="infoProduct">
+        <div class="product-titles">
+          <h3 class="productName">{{product.id}}. {{product.name}}</h3>
+          <p class="productDetail">{{product.details}}</p>
+          <img [src]="product.image" alt="{{product.name}}" class="imgProduct">
+          <p class="productPrice">R$ {{product.price}},00</p>
+        </div>
+       <!--  <div class="">
+          <p class="productPrice">R$ {{product.price}}</p>
+          <div class=""> -->
+
+          <!--   <a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+            </svg></a>
+ -->
+           <!-- <img (click)="removeProduct(product.id)" src="" alt="icon minus">
+            <span>{{ productQuantities[product.id] }}</span>
+            <img (click)="addProduct(product.id)" src="" alt="icon plus">
+          </div>
+        </div>
+      </div>
+      <img [src]="product.image" alt="{{product.name}}" class="product-img">  
+    </div> -->     
+<!-- </section> -->
+
+
  

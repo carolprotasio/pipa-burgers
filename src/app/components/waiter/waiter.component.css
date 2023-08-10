@@ -5,7 +5,36 @@
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
-
+/* -------Parte aa Pagina Chef-----*/
+.menuSection::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../../assets/fm_light1.png) no-repeat top center;
+    background-size: cover;
+    z-index: -1;
+}
+.menuSection {
+    margin-top: 13%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.logoPb {      
+    width: 200px;
+    position: absolute;
+    top: 9%; 
+    left: 50%;
+    transform: translateX(-50%); 
+}
+.imgProduct {
+    height: 65px;
+    width: 80px;
+}
 /* -------PARTE DA NAV------- */
 .logo {    
     height: 45px;
@@ -98,14 +127,14 @@ ul li.item-list:hover {
     }
     .logoPb {
         width: 200px;
-        margin-top: 8%;
+        margin-top: 1%;
     }
     .mainText {
         margin-bottom: 40px; 
     }
 
     .mainSection {
-        margin-top: 40px; 
+        margin-top: 20%; 
     }
  
     .item-list a {
