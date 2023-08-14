@@ -10,13 +10,13 @@
     </div>
     <ul>          
         <li class="item-list">
-            <a href="#">
+            <a href="">
                 <span class="icon"><i class="bi bi-plus-circle"></i></span>
                 <span class="text-link">Fazer Pedido</span>
             </a>
         </li>
         <li class="item-list">
-            <a href="#">
+            <a href="" target="">
                 <span class="icon"><i class="bi bi-stopwatch"></i></span>
                 <span class="text-link">Pedidos em Espera</span>
             </a>
@@ -30,26 +30,32 @@
     </ul>
 </nav> 
 <section class="menuSection">
-    <div>
-            <img src="../../../assets/logoPB.png" alt="logo" class="logoPb">
+    <div class="logoPb">
+            <img src="../../../assets/logoPB.png" alt="logo">
             
     </div>
-    <span class="menuTitle">Menu</span>
+    <img src="../../../assets/menu.png" class="menuTitle">
      <div class="menuChoice">
       <button (click)="filterProductsByType('café da manhã')" [ngClass]="{'active': productType === 'café da manhã'}" class="btn-breakfast">Café da manhã</button>
       <button (click)="filterProductsByType('lanches')" [ngClass]="{'active': productType === 'lanches'}" class="btn-snack">Lanches</button>
       <button (click)="filterProductsByType('bebidas')" [ngClass]="{'active': productType === 'bebidas'}" class="btn-drinks">Bebidas</button>
     </div> 
       
-    <div *ngFor="let product of filterProducts" class="menuAll">
-      <div class="infoProduct">
-        <div class="product-titles">
-          <h3 class="productName">{{product.id}}. {{product.name}}</h3>
-          <p class="productDetail">{{product.details}}</p>
-          <img [src]="product.image" alt="{{product.name}}" class="imgProduct">
-          <p class="productPrice">R$ {{product.price}},00</p>
-        </div>
-       <!--  <div class="">
+    <div class="productGrid">
+      <div *ngFor="let product of filterProducts" class="productBox productContainer">
+          <div class="productImage">
+              <img [src]="product.image" alt="{{product.name}}">
+          </div>
+          <div class="productInfo">
+              <h3 class="productName">{{product.name}}</h3>
+              <p class="productDetail">{{product.details}}</p>
+              <p class="productPrice">R$ {{product.price}},00</p>
+          </div>
+      </div>
+  </div>
+       
+
+   <!--  <div class="">
           <p class="productPrice">R$ {{product.price}}</p>
           <div class=""> -->
 
@@ -64,8 +70,7 @@
         </div>
       </div>
       <img [src]="product.image" alt="{{product.name}}" class="product-img">  
-    </div> -->     
-<!-- </section> -->
-
+    </div> --> 
+</section> 
 
  
