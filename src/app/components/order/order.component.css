@@ -53,7 +53,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
+#customerName {
+    background-color: #b19090;
+    color: rgb(207, 203, 203);
+}
 .attendantInfo {
     font-size: 18px;
 }

@@ -8,12 +8,18 @@ import { Component, Input, ChangeDetectorRef } from '@angular/core';
 export class OrderComponent {
   @Input() listProduct: any[] = [];
   @Input() totalValue: number = 0;
-  orderProducts: any[] = []; 
+  orderProducts: any[] = [];
+  loggedInUsername ="loggedInUsername" 
   
 
   constructor(
     private cdRef: ChangeDetectorRef
   ) {}
+
+  ngOnChanges(changes: any) {
+    console.log(changes.listProduct.currentValue);
+    this.calculateTotalValue();
+  }
 
   incrementQty(product: any) {
     product.qty++;
@@ -42,6 +48,12 @@ export class OrderComponent {
       console.log('Order Products:', this.orderProducts);
       this.calculateTotalValue();
       this.cdRef.detectChanges();
+
+       //reset
+    /* this.orderProducts = [];
+    this.totalValue = 0;
+    
+    this.orderProducts = null; */
   }
   }
 
