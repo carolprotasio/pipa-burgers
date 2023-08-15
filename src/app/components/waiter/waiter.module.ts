@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { WaiterRoutingModule } from './waiter-routing.module';
 import { WaiterComponent } from './waiter.component';
+import { OrderModule } from '../order/order.module';
+
 
 
 @NgModule({
   declarations: [
-    WaiterComponent
+    WaiterComponent, 
+    
   ],
   imports: [
     CommonModule,
-    WaiterRoutingModule
+    WaiterRoutingModule,
+    OrderModule,
   ],
   exports: [
     WaiterComponent

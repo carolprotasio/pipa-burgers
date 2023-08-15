@@ -6,7 +6,7 @@
     font-family: 'Outfit', sans-serif;
     
 }
-/* -------Parte aa Pagina Chef-----*/
+/* -------Parte da Pagina Chef-----*/
 .menuSection::before {
     content: "";
     position: fixed;
@@ -70,7 +70,7 @@
 
 .productGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
     margin-top: 40px;
     max-width: 1200px;
@@ -114,6 +114,132 @@
 .productContainer:hover {
     background-color: rgb(209, 207, 207);
 }
+/*--------PARTE DO RESUMO DO PEDIDO--------*/
+.orderSummaryContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.orderSummary {
+    border: 1px solid #ccc;
+    background-color: rgba(197, 197, 197, 0.704);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.summaryTitle {
+    margin: 0;
+}
+.orderSummary h3 {
+    margin: 0;
+}
+
+.customerInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.customerInfo label {
+    margin-right: 10px;
+}
+
+.customerInfo input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.attendantInfo {
+    font-size: 18px;
+}
+.productDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productList {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.productItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.productItem:last-child {
+    border-bottom: none;
+}
+
+.productImage img {
+    max-width: 80px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.productInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.productName {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.productPrice {
+    margin: 0;
+    margin-right: 15px;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+}
+
+.removeButton {
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    background: none;
+}
+
+.totalValue {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: right;
+}
+
+.addToOrderButton {
+    background-color: #981313;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.addToOrderButton:hover {
+    margin: auto;
+    background-color: #c92d2d;
+}
+
 
 /* -------PARTE DA NAV------- */
 .logo {    

@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+    
+}
+/*--------PARTE DO RESUMO DO PEDIDO--------*/
+.orderSummaryContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.orderSummary {
+    border: 1px solid #ccc;
+    background-color: rgba(197, 197, 197, 0.704);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    margin-bottom: 15px;
+    margin-top: -50px;
+    display: flex; /* Adicione essa linha para usar flexbox */
+    flex-direction: column; /* Defina a direção da flexbox como coluna */
+    align-items: center;
+}
+.summaryTitle {
+    text-align: center;
+    padding: 10px;
+    font-size: 2em;
+}
+.orderSummary h3 {
+    margin: 0;
+}
+
+.customerInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.customerInfo label {
+    margin-right: 10px;
+}
+
+.customerInfo input {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.attendantInfo {
+    font-size: 18px;
+}
+.productDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.productList {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.productItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.productItem:last-child {
+    border-bottom: none;
+}
+
+.productImage img {
+    max-width: 60px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.productInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.productName {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.productPrice {
+    margin: 0;
+    margin-right: 15px;
+}
+
+.quantityControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    
+}
+
+.removeButton {
+    color: red;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+    background: none;
+}
+.total {
+    font-size: 1.8em;
+    margin-top: 10px;
+    display: flex; /* Use flexbox para alinhar elementos */
+    align-items: center; /* Centralize verticalmente */
+    justify-content: space-between; /* Distribua o espaço disponível entre os elementos */
+    width: 100%; 
+}
+.totalValue {
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: right;
+    margin-left: auto;
+    margin-top: 2px;
+}
+
+.addToOrderButton {
+    background-color: #981313;
+    color: white;
+    
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    margin-top: 20px;
+}
+
+.addToOrderButton:hover {
+    margin: auto;
+    background-color: #c92d2d;
+}

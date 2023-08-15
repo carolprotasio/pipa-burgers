@@ -6,9 +6,11 @@ import { ChefModule } from './components/chef/chef.module';
 import { AdminModule } from './components/admin/admin.module';
 import { WaiterModule } from './components/waiter/waiter.module';
 import { MenuModule } from './components/menu/menu.module';
+import { OrderModule } from './components/order/order.module';
 
 import { LoginComponent } from './components/login/login.component';
 import { WaiterComponent } from './components/waiter/waiter.component';
+
 
 const routes: Routes = [
   {
@@ -41,6 +43,11 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./components/menu/menu.module').then( m => MenuModule)
+
+  },
+  {
+    path: 'order',
+    loadChildren: () => import('./components/order/order.module').then( m => OrderModule)
 
   }
 

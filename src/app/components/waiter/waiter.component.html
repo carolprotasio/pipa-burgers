@@ -1,76 +1,142 @@
 <!-- <p>waiter works!</p> -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+/>
 <nav class="menu-lateral">
-    <div>
-        <img src="../../../assets/burguer1.png" alt="logo" class="logo">
-        
-    </div>
-    <div class="btn-expandir">
-        
-    </div>
-    <ul>          
-        <li class="item-list">
-            <a href="">
-                <span class="icon"><i class="bi bi-plus-circle"></i></span>
-                <span class="text-link">Fazer Pedido</span>
-            </a>
-        </li>
-        <li class="item-list">
-            <a href="" target="">
-                <span class="icon"><i class="bi bi-stopwatch"></i></span>
-                <span class="text-link">Pedidos em Espera</span>
-            </a>
-        </li>
-        <li class="item-list">
-            <a (click)="logout()">
-                <span class="icon"><i class="bi bi-box-arrow-left"></i></span>
-                <span class="text-link">Sair</span>
-            </a>
-        </li>
-    </ul>
-</nav> 
-<section class="menuSection">
-    <div class="logoPb">
-            <img src="../../../assets/logoPB.png" alt="logo">
-            
-    </div>
-    <img src="../../../assets/menu.png" class="menuTitle">
-     <div class="menuChoice">
-      <button (click)="filterProductsByType('café da manhã')" [ngClass]="{'active': productType === 'café da manhã'}" class="btn-breakfast">Café da manhã</button>
-      <button (click)="filterProductsByType('lanches')" [ngClass]="{'active': productType === 'lanches'}" class="btn-snack">Lanches</button>
-      <button (click)="filterProductsByType('bebidas')" [ngClass]="{'active': productType === 'bebidas'}" class="btn-drinks">Bebidas</button>
-    </div> 
-      
-    <div class="productGrid">
-      <div *ngFor="let product of filterProducts" class="productBox productContainer">
-          <div class="productImage">
-              <img [src]="product.image" alt="{{product.name}}">
-          </div>
-          <div class="productInfo">
-              <h3 class="productName">{{product.name}}</h3>
-              <p class="productDetail">{{product.details}}</p>
-              <p class="productPrice">R$ {{product.price}},00</p>
-          </div>
-      </div>
+  <div>
+    <img src="../../../assets/burguer1.png" alt="logo" class="logo" />
   </div>
-       
+  <div class="btn-expandir"></div>
+  <ul>
+    <li class="item-list">
+      <a href="">
+        <span class="icon"><i class="bi bi-plus-circle"></i></span>
+        <span class="text-link">Fazer Pedido</span>
+      </a>
+    </li>
+    <li class="item-list">
+      <a href="" target="">
+        <span class="icon"><i class="bi bi-stopwatch"></i></span>
+        <span class="text-link">Pedidos em Espera</span>
+      </a>
+    </li>
+    <li class="item-list">
+      <a (click)="logout()">
+        <span class="icon"><i class="bi bi-box-arrow-left"></i></span>
+        <span class="text-link">Sair</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<section class="menuSection">
+  <div class="logoPb">
+    <img src="../../../assets/logoPB.png" alt="logo" />
+  </div>
+  <img src="../../../assets/menu.png" class="menuTitle" />
+  <div class="menuChoice">
+    <button
+      (click)="filterProductsByType('café da manhã')"
+      [ngClass]="{ active: productType === 'café da manhã' }"
+      class="btn-breakfast"
+    >
+      Café da manhã
+    </button>
+    <button
+      (click)="filterProductsByType('lanches')"
+      [ngClass]="{ active: productType === 'lanches' }"
+      class="btn-snack"
+    >
+      Lanches
+    </button>
+    <button
+      (click)="filterProductsByType('bebidas')"
+      [ngClass]="{ active: productType === 'bebidas' }"
+      class="btn-drinks"
+    >
+      Bebidas
+    </button>
+  </div>
+  <div class="productGrid">
+    <div
+      *ngFor="let product of filterProducts"
+      class="productBox productContainer"
+      (click)="selectProduct(product)"
+    >
+      <div class="productImage">
+        <img [src]="product.image" alt="{{ product.name }}" />
+      </div>
+      <div class="productInfo">
+        <h3 class="productName">{{ product.name }}</h3>
+        <p class="productDetail">{{ product.details }}</p>
+        <p class="productPrice">R$ {{ product.price }},00</p>
+      </div>
+    </div>
+  </div>
+  <app-order [listProduct]="listProduct ?? []" [totalValue]="totalValue"></app-order>
 
-   <!--  <div class="">
-          <p class="productPrice">R$ {{product.price}}</p>
-          <div class=""> -->
 
-          <!--   <a><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-            </svg></a>
- -->
-           <!-- <img (click)="removeProduct(product.id)" src="" alt="icon minus">
-            <span>{{ productQuantities[product.id] }}</span>
-            <img (click)="addProduct(product.id)" src="" alt="icon plus">
+<!-- Resumo -->
+  <!-- <div class="orderSummary" *ngIf="listProduct && listProduct.length > 0">
+    <h3 class="summaryTitle">Resumo do Pedido</h3>
+    <form>
+      <div class="customerInfo">
+        <label for="customerName">Nome do Cliente/Mesa:</label>
+        <input
+          type="text"
+          id="customerName"
+          formControlName="customerName"
+          placeholder="Nome do cliente ou número da mesa"
+        />
+      </div>
+      <div class="attendantInfo">
+        <p>Atendente: {{ loggedInUsername }}</p>
+      </div>
+      <hr>
+
+      <div *ngFor="let product of listProduct">
+        <div class="productImage">
+          <img [src]="product.product.image" alt="{{ product.product.name }}" />
+        </div>    
+          
+        <div class="productDetails">
+          <h3 class="productName">{{ product.product.name }}</h3>
+          <p class="productPrice">R$ {{ product.product.price }},00</p>          
+          <div class="quantityControls">
+            <button
+              (click)="decrementQty(product)"
+              type="button"
+              class="quantityButton"
+            ><i class="bi bi-dash-circle"></i>
+            </button>
+            <span class="quantity">{{ product.qty }}</span>
+            <button
+              (click)="incrementQty(product)"
+              type="button"
+              class="quantityButton"
+            ><i class="bi bi-plus-circle"></i>
+            </button>
+            <button
+              (click)="removeItem(product)"
+              type="button"
+              class="removeButton"
+            ><i class="bi bi-trash"></i>
+            </button>
+            
           </div>
         </div>
+               
       </div>
-      <img [src]="product.image" alt="{{product.name}}" class="product-img">  
-    </div> --> 
-</section> 
-
- 
+      <hr>
+        Exibir o total do pedido 
+       <div class="total">
+        <p>Total:</p>
+        <p class="totalValue">R$ {{ totalValue.toFixed(2) }}</p>
+      </div>
+       Botão para adicionar ao pedido 
+      <button type="button" (click)="addToOrder()" class="addToOrderButton">
+        Adicionar ao Pedido
+      </button>
+    </form>
+  </div> -->
+</section>
