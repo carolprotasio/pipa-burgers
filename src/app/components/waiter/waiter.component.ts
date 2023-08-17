@@ -98,18 +98,15 @@ export class WaiterComponent {
       return total + product.qty * product.product.price;
     }, 0);
   }
-
-  placeOrder() {
+  // Enviar pedido a cozinha 
+  onSendOrder(orderData: any) {
+    console.log('Order sent:', orderData.products);
+    console.log('Total:', orderData.totalValue);
     
-    console.log('Order placed:', this.orderProducts);
-    console.log('Total:', this.totalValue);
-    console.log('Customer Name:', this.customerName);
-    console.log('Waiter:', this.loggedInUsername);
-
-    //reset
-    this.orderProducts = [];
+    this.listProduct = []; 
     this.totalValue = 0;
-    this.customerName = '';
-    /* this.listProduct = null; */
+    this.cdRef.detectChanges();
   }
+
+
 }

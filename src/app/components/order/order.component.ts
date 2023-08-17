@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectorRef, Output, EventEmitter  } from '@angular/core';
 
 @Component({
   selector: 'app-order',
@@ -9,7 +9,8 @@ export class OrderComponent {
   @Input() listProduct: any[] = [];
   @Input() totalValue: number = 0;
   orderProducts: any[] = [];
-  loggedInUsername ="loggedInUsername" 
+  loggedInUsername ="loggedInUsername"
+  @Output() sendOrder: EventEmitter<any> = new EventEmitter<any>();
   
 
   constructor(
@@ -45,15 +46,10 @@ export class OrderComponent {
     if (this.listProduct && this.listProduct.length > 0) {
       this.orderProducts.push(...this.listProduct);
       this.listProduct = [];
+      this.orderProducts = [];
       console.log('Order Products:', this.orderProducts);
       this.calculateTotalValue();
-      this.cdRef.detectChanges();
-
-       //reset
-    /* this.orderProducts = [];
-    this.totalValue = 0;
-    
-    this.orderProducts = null; */
+      this.cdRef.detectChanges();      
   }
   }
 
