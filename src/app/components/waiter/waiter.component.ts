@@ -28,7 +28,7 @@ export class WaiterComponent {
   ngOnInit(): void {
     this.filterProductsByType(this.productType);
     
-    this.loggedInUsername = 'Carol Protásio';
+    this.loggedInUsername = this.authService.getUserEmail() ?? '';
   }
 
   filterProductsByType(type: string) {
@@ -77,13 +77,13 @@ export class WaiterComponent {
     }
   }
 
-  addToOrder() {
+/*   addToOrder() {
     if (this.listProduct && this.listProduct.length > 0) {
       this.orderProducts.push(...this.listProduct);
       this.listProduct = [];
       this.calculateTotalValue();
   }
-  }
+  } */
 
   removeFromOrder(product: any) {
     const index = this.orderProducts.indexOf(product);
@@ -106,6 +106,12 @@ export class WaiterComponent {
     this.listProduct = []; 
     this.totalValue = 0;
     this.cdRef.detectChanges();
+  }
+
+  resetOrder() {
+    this.listProduct = [];
+    this.totalValue = 0;
+    console.log("Resetando a order");
   }
 
 
