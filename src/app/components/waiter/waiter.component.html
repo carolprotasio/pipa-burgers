@@ -73,7 +73,7 @@
       </div>
     </div>
   </div>
-  <app-order [listProduct]="listProduct ?? []" [totalValue]="totalValue"></app-order>
+  <app-order [listProduct]="listProduct ?? []" [totalValue]="totalValue" [loggedInUsername]="loggedInUsername" (sendOrder)="resetOrder"></app-order>
 
 
 <!-- Resumo do pedido-->
