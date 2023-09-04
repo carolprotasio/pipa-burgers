@@ -1,21 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Outfit', sans-serif;
 }
+
 /* Parte do chef */
+.logoPb {    
+    width: 300px;
+    position: absolute;
+    top: 10%; 
+    left: 50%;
+    transform: translateX(-50%);   
+    z-index: 2;
+}
+
 main {
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
-    display: flex;
-    padding-top: 5%; 
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-   
+    padding-top: 5%;
 }
 
 main::before {
@@ -29,109 +39,247 @@ main::before {
     background-size: cover;
     z-index: -1;
 }
-.mainSection {
-    margin-top: 20px; 
+
+/* .mainSection {
+    margin-top: -150px; 
     text-align: center;
     display: flex; 
     gap: 60px; 
     flex-wrap: wrap; 
     justify-content: center;
     background-position: top;
+} */
+.mainSection {
+    
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-position: top;
+    
+}
+/* Estilo para os botões "Pedidos pendentes" e "Pedidos finalizados" */
+.order-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+.btn-orders {
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+}
+ .pendingOrders,.ReadyOrders {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 20px; 
+} 
+
+/* Estilo para os botões "Pedidos pendentes" e "Pedidos finalizados" */
+.pending-orders-btn, .completed-orders-btn {
+    background-color: #981313;
+    color: rgb(9, 9, 9);
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.533);
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s, color 0.2s;
+} 
+
+/* Estilo para o botão "Pedidos pendentes" quando ativo */
+.pending-orders-btn.active {
+    background-color: #c92d2d;
+    color: white;
 }
 
-.mainText {
-    font-size: 2em;
-    background-color: #98131397;
-    color: black;
-    margin-bottom: 280px;
-    text-shadow: 5px 5px 10px rgba(0, 0, 0, 0.374);
-    border-radius: 10px;
-    padding: 5px;
-    border: none;
-    
-    
+/* Estilo para o botão "Pedidos finalizados" quando ativo */
+.completed-orders-btn.active {
+    background-color: #c92d2d;
+    color: white;
 }
+
+ .orders-container {
+    max-height: 70vh; 
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+    max-width: 1200px;
+    width: 90%;
+    justify-items: center;
+    align-content: center;
+    margin-bottom: 100px;
+    padding: 20px;
+    margin-left: 25px;
+    margin-top: 60px;
+}
+
+/* Estilos para a seção de pedidos */
+.order-section {
+    /* margin-top: -60px; */
+    background-color: #f0f0f067;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+    cursor: pointer;
+    width: 100%;
+
+    margin-right: 10px; 
+    display: inline-block; 
+    vertical-align: top; 
+}
+/* .order-section:last-child {
+    margin-right: 0; /* Remove o espaço à direita do último pedido 
+  } */
+
+.order-section:hover {
+    transform: scale(1.03);
+}
+
+/* Outros estilos para elementos dentro da seção de pedidos */
+.order-label {
+    font-weight: bold;
+}
+
+.customer-info {
+    margin-top: 10px;
+}
+
+.waiter-name {
+    font-style: italic;
+}
+
+/* Estilos para a lista de produtos */
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+/* Estilos para o botão "Pronto" */
+.btn-ready-orders {
+    background-color: #147014; 
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-ready-orders:hover {
+    background-color: #0c500c; 
+}
+
+/* Estilos para o botão "Pedidos Pendentes" */
+.btn.pending-orders-btn.active {
+    background-color: #981313;
+    color: white;
+}
+
+.btn.pending-orders-btn.active:hover {
+    background-color: #c92d2d;
+}
+
+/* Estilos para o botão "Pedidos Finalizados" */
+.btn.completed-orders-btn.active {
+    background-color: #0d5e12;
+    color: white;
+}
+
+.btn.completed-orders-btn.active:hover {
+    background-color: #c92d2d;
+}
+
 .green {
     background-color: rgba(97, 204, 97, 0.503);
 }
-.logoPb {    
-    width: 300px;
-    position: absolute;
-    top: 10%; 
-    left: 50%;
-    transform: translateX(-50%);   
-}
 
+/*======================================================*/
 
 /* parte da nav */
 .logo {    
     height: 45px;
 }
+
 .text-logo {
     margin-left: 40px;
     color: #bcd3ee;
     font-size: 20px;
 }
+
 .menu-lateral {
     width: 100px;
     height: 100%;
     background-color: black;
     padding: 40px 0 40px 1%;
     box-shadow: 3px 0 0 #981313;
-    
     position: fixed;
     top: 0;
     left: 0;
-    
     overflow: hidden;
     transition: .2s;
-    z-index: 2;;
-    
+    z-index: 2;
 }
+
 .menu-lateral:hover {
-    width:300px;
+    width: 300px;
 }
+
 .btn-expandir {
     width: 100%;
     padding-left: 10px;
     margin: 20px 0 100px 0;
 }
+
 .btn-expandir > i {    
     color: #981313;
     font-size: 35px;
     cursor: pointer;
 }
+
 ul {
     height: 100%;
     list-style-type: none;
-    
 }
+
 ul li.item-list {
     transition: .2s;
 }
+
 ul li.item-list:hover {
     color: white;
     background-color: #981313;   
-    
 }
+
 .item-list a:hover {
     color: #bcd3ee;
 }
+
 .item-list a{
     color: #981313;
     text-decoration: none;
     font-size: 20px;
     padding: 20px 4%;
     display: flex;
-
     line-height: 40px;
-    
     margin-bottom: 20px; 
-
 }
+
 .text-link {
     margin-left: 40px;
 }
+
 .icon > i {
     font-size: 30px;
     margin-left: 10px;
@@ -144,6 +292,7 @@ ul li.item-list:hover {
         margin-left: 51px;
     }
 }
+
 @media (max-width: 767px) {
     .menu-lateral {
         width: 100%;
@@ -153,34 +302,37 @@ ul li.item-list:hover {
         position: fixed; 
         border-bottom: 3px solid #981313;    
     }
+    
     .logoPb {
         width: 200px;
         margin-top: 8%;
     }
+    
     .mainText {
         margin-bottom: 40px; 
     }
-
+    
     .mainSection {
         margin-top: 40px; 
     }
- 
+    
     .item-list a {
         flex-direction: row;
         justify-content: center;
     }
-
+    
     .menu-lateral:hover {
         width: 100%;
     }
+    
     .logo {
         margin-left: 15px;
     }
-
+    
     .btn-expandir {
         display: none;
     }
-
+    
     ul {
         display: flex;
         justify-content:flex-end;
@@ -188,15 +340,17 @@ ul li.item-list:hover {
         flex-wrap: nowrap;
         padding: 10px;        
     } 
+    
     ul li.item-list:hover,
     ul li a:hover  {
         color: #bcd3ee; 
         background-color: transparent;        
-        
     }
+    
     .text-link {
         display: none;
     }
+    
     .icon {
        margin-left: 20px;
        margin-top: -130%;

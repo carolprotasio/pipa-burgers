@@ -24,8 +24,8 @@
     margin: 0 auto;
     margin-bottom: 15px;
     margin-top: -50px;
-    display: flex; /* Adicione essa linha para usar flexbox */
-    flex-direction: column; /* Defina a direção da flexbox como coluna */
+    display: flex; 
+    flex-direction: column; 
     align-items: center;
 }
 .summaryTitle {

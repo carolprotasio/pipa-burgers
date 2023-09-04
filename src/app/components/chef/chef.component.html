@@ -1,6 +1,3 @@
-<!-- <app-nav-bar></app-nav-bar>  -->
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
@@ -33,75 +30,73 @@
             </li>
         </ul>
     </nav> 
-   
-  <main>
-      
-          <div>
-              <img src="../../../assets/logoPB.png" alt="Logo" class="logoPb">
-          </div>
-          <section class="mainSection">
-              
-              <div class="waitOrders mainText">
-                  <button (click)="showPendingOrders = true" [ngClass]="{'active': showPendingOrders === true}" class="btn pending-orders-btn">Pedidos pendentes</button>
-              </div>
-              
-              <div class="waitBox mainText green">
-                  <button  (click)="showPendingOrders = false" [ngClass]="{'active': showPendingOrders === false}" class="btn completed-orders-btn">Pedidos finalizados</button>
-              </div>
-              
-          <!--     <section *ngIf="showPendingOrders" class="pending-orders grid">
-                <div *ngIf="showImage" class="no-orders flexbox-column">
-                  <img class="no-orders-img" src="../../../assets/overcooked-no-orders.png" alt="overcooked chef">
-                  <span class="no-orders-span">Sem pedidos no momento!</span>
-                </div> -->
-                <section *ngFor="let order of pendingOrders" class="order-container boxshadow flexbox-column">
-                  <span class="red-title order-number">Pedido número: {{ order.id }}</span>
-                  <div class="client-table-name flexbox">
-                   
-                    <div class="client-name">
-                      <span>Cliente:</span>
-                      <span class="data-client">{{ order.customerName}}</span>
-                    </div>
-                  </div>
-                  <span class="waiter-name">Atendente: {{ order.waiter }}</span>
-                  <div class="title-quant-order flexbox">
-                    <span class="red-title">Pedido</span>
-                    <span class="red-title">Quant.</span>
-                  </div>
-                  <div *ngFor="let product of order.products" class="order-details flexbox">
-                    <span class="order-data">{{ product.name }}</span>
-                    <span class="order-data quantity-data">{{ product.quantity }}</span>
-                  </div>
-                  <button  class="btn-ready-orders">Pronto</button>
-                  <!-- (click)="markOrderAsCompleted(order) -->
-                </section>
-              </section>
-              <section *ngIf="!showPendingOrders" class="completed-orders grid">
-                <div *ngFor="let order of completedOrders" class="order-container boxshadow flexbox-column">
-                  <span class="red-title order-number">Pedido número: {{ order.id }}</span>
-                  <div class="client-table-name flexbox">
-                    
-                    <div class="client-name">
-                      <span>Cliente:</span>
-                      <span class="data-client">{{ order.customerName}}</span>
-                    </div>
-                  </div>
-                  <span class="waiter-name">Atendente: {{ order.waiter }}</span>
-                  <div class="title-quant-order flexbox">
-                    <span class="red-title">Pedido</span>
-                    <span class="red-title">Quant.</span>
-                  </div>
-                  <div *ngFor="let product of order.products" class="order-details flexbox">
-                    <span class="order-data">{{ product.name }}</span>
-                    <span class="order-data quantity-data">{{ product.quantity }}</span>
-                  </div>
-                  <span class="time-completed">Concluido em: {{ order.completedDate }}</span>
-                </div>
-              </section>
 
-
-          
-  </main>
-     
     
-
+    <main [ngClass]="{'showPendingOrders': showPendingOrders}">
+      <div>
+        <img src="../../../assets/logoPB.png" alt="Logo" class="logoPb">
+      </div>
+    
+      <section class="mainSection">
+        <!-- Botões de filtro de pedidos -->
+        <div class="btn-orders">
+          <div class="order-filters">
+            <button (click)="loadOrders(true)" [ngClass]="{'active': showPendingOrders }" class="btn pending-orders-btn">Pedidos pendentes</button>
+          </div>
+          <div class="ReadyOrders">
+            <button (click)="loadOrders(false)" [ngClass]="{'active': !showPendingOrders}" class="btn completed-orders-btn">Pedidos finalizados</button>
+          </div>
+        </div>
+    
+        <!-- Lista de pedidos pendentes -->
+        <div class="orders-container">
+        <div *ngIf="showPendingOrders; else completedOrdersSection">
+          <div class="orders-container">
+            <section *ngFor="let order of (showPendingOrders ? pendingOrders : completedOrders)" class="order-section">
+              <span class="order-label">Pedido número: {{ order.id }}</span>
+              <div class="customer-info">
+                <div class="customer-label">
+                  <span>Cliente/Mesa:</span>
+                </div>
+                <span class="customer-data">{{ order.client }}</span>
+              </div>
+              <span class="waiter-name">Atendente: {{ order.waiter }}</span>
+              <div class="order-info">
+                <span class="order-label">Pedido</span>
+                <span class="order-label">/ Quant.</span>
+              </div>
+              <div *ngFor="let product of order.products" class="product-info">
+                <span class="order-data">{{ product.name }}</span>
+                <span class="order-data quantity-data">{{ product.quantity }}</span>
+              </div>
+              <button class="btn-ready-orders" (click)="markOrderAsReady(order)">Pronto</button>
+            </section>
+          </div>
+        </div>
+        </div>
+    
+        <!-- Conteúdo dos pedidos finalizados -->
+        <ng-template #completedOrdersSection>
+          <section *ngFor="let order of completedOrders" class="order-section ">
+            <span class="order-label">Pedido número: {{ order.id }}</span>
+            <div class="customer-info">
+              <div class="customer-label">
+                <span>Cliente/Mesa:</span>
+              </div>
+              <span class="customer-data">{{ order.client }}</span>
+            </div>
+            <span class="waiter-name">Atendente: {{ order.waiter }}</span>
+            <div class="order-info">
+              <span class="order-label">Pedido</span>
+              <span class="order-label">Quant.</span>
+            </div>
+            <div *ngFor="let product of order.products" class="product-info">
+              <span class="order-data">{{ product.name }}</span>
+              <span class="order-data quantity-data">{{ product.quantity }}</span>
+            </div>
+            <span class="order-label">Concluído em: {{ order.completedDate }}</span>
+          </section>
+        </ng-template>
+      </section>
+    </main>
+    

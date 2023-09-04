@@ -44,74 +44,30 @@ export class WaiterComponent {
     );
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']); 
-  }
-
   selectProduct(product: any) {
-    this.listProduct = [...(this.listProduct || []), { product: product, qty: 1 }];
+    this.listProduct = [...(this.listProduct || []), { product: {...product, quantity: 1} }];
     console.log(this.listProduct);
     this.calculateTotalValue();
     this.cdRef.detectChanges();
     
   }
 
-  incrementQty(product: any) {
-    product.qty++;
-    this.calculateTotalValue();
-  }
-
-  decrementQty(product: any) {
-    if (product.qty > 1) {
-      product.qty--;
-      this.calculateTotalValue();
-    }
-  }
-
-  removeItem(product: any) {
-    const index = this.listProduct?.indexOf(product);
-    if (index !== undefined && index !== -1) {
-      this.listProduct?.splice(index, 1);
-      this.calculateTotalValue();
-    }
-  }
-
-/*   addToOrder() {
-    if (this.listProduct && this.listProduct.length > 0) {
-      this.orderProducts.push(...this.listProduct);
-      this.listProduct = [];
-      this.calculateTotalValue();
-  }
-  } */
-
-  removeFromOrder(product: any) {
-    const index = this.orderProducts.indexOf(product);
-    if (index !== -1) {
-      this.orderProducts.splice(index, 1);
-      this.calculateTotalValue();
-    }
-  }
 
   calculateTotalValue() {
     this.totalValue = this.orderProducts.reduce((total, product) => {
-      return total + product.qty * product.product.price;
+      return total + product.product.quantity * product.product.price;
     }, 0);
-  }
-  // Enviar pedido a cozinha 
-  onSendOrder(orderData: any) {
-    console.log('Order sent:', orderData.products);
-    console.log('Total:', orderData.totalValue);
-    
-    this.listProduct = []; 
-    this.totalValue = 0;
-    this.cdRef.detectChanges();
   }
 
   resetOrder() {
     this.listProduct = [];
     this.totalValue = 0;
     console.log("Resetando a order");
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']); 
   }
 
 

@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class OrderComponent {
   @Input() listProduct: any[] = [];
   @Input() totalValue: number = 0;
-  orderProducts: any[] = [];
+  /* orderProducts: any[] = []; */
   @Input() loggedInUsername: string = '';
   @Output() sendOrder: EventEmitter<any> = new EventEmitter<any>();
   customerName: string = '';
@@ -19,7 +19,7 @@ export class OrderComponent {
   constructor(
     private cdRef: ChangeDetectorRef,
     private http: HttpClient
-  ) {}
+  ) { }
 
   ngOnChanges(changes: any) {
     console.log(changes.listProduct.currentValue);
@@ -27,13 +27,13 @@ export class OrderComponent {
   }
 
   incrementQty(product: any) {
-    product.qty++;
+    product.product.quantity++;
     this.calculateTotalValue();
   }
 
   decrementQty(product: any) {
-    if (product.qty > 1) {
-      product.qty--;
+    if (product.product.quantity > 1) {
+      product.product.quantity--;
       this.calculateTotalValue();
     }
   }
@@ -47,7 +47,8 @@ export class OrderComponent {
   }
 
   addToOrder() {
-    if (this.listProduct && this.listProduct.length > 0) {
+    console.log(this.listProduct)
+     if (this.listProduct && this.listProduct.length > 0) {
       const token = localStorage.getItem('token');
       this.customerName = (document.getElementById('customerName') as HTMLInputElement).value;
 
@@ -65,7 +66,8 @@ export class OrderComponent {
           products: this.listProduct.map(item => {
             return {
               name: item.product.name,
-              quantity: item.quantity
+              quantity: item.product.quantity,
+              price: item.product.price
             };            
           })
         };
@@ -73,14 +75,15 @@ export class OrderComponent {
         this.http.post('http://localhost:8080/orders', order, { headers }).subscribe(
           (response: any) => {
             console.log('Pedido enviado com sucesso:', response);
-            /* this.orderProducts = []; */
+            
             this.customerName = '';
             this.totalValue = 0;
+            this.listProduct = [];
             this.cdRef.detectChanges();
             
             this.sendOrder.emit();
             
-            console.log(this.orderProducts)
+            
             console.log(this.listProduct)
             this.calculateTotalValue();
             this.openSuccessMessage();
@@ -94,7 +97,7 @@ export class OrderComponent {
       } else {
         console.error('Token de autenticação não encontrado.');
       }
-    }
+    } 
   }
 
   resetOrder() {
@@ -115,7 +118,7 @@ export class OrderComponent {
 
   calculateTotalValue() {
     this.totalValue = this.listProduct.reduce((total: number, product: any) => {
-      return total + product.qty * product.product.price;
+      return total + product.product.quantity * product.product.price;
     }, 0);
   }
 }

@@ -10,6 +10,7 @@ import { OrderModule } from './components/order/order.module';
 
 import { LoginComponent } from './components/login/login.component';
 import { WaiterComponent } from './components/waiter/waiter.component';
+import { ChefComponent } from './components/chef/chef.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'waiter', 
     component: WaiterComponent 
+  },
+  {
+    path: 'chef', 
+    component: ChefComponent 
   },
   {
     path: '',

@@ -5,7 +5,7 @@ import { ChefComponent } from './chef.component';
 const routes: Routes = [
   {
     
-      path: '',
+      path: 'chef',
       component: ChefComponent
     
   }
