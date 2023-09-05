@@ -33,7 +33,7 @@
 
     
     <main [ngClass]="{'showPendingOrders': showPendingOrders}">
-      <div>
+      <div class="header-container">
         <img src="../../../assets/logoPB.png" alt="Logo" class="logoPb">
       </div>
     
@@ -51,19 +51,23 @@
         <!-- Lista de pedidos pendentes -->
         <div class="orders-container">
         <div *ngIf="showPendingOrders; else completedOrdersSection">
-          <div class="orders-container">
+          <div class="pending-orders-container">
             <section *ngFor="let order of (showPendingOrders ? pendingOrders : completedOrders)" class="order-section">
               <span class="order-label">Pedido número: {{ order.id }}</span>
               <div class="customer-info">
                 <div class="customer-label">
                   <span>Cliente/Mesa:</span>
+                  <span class="customer-data">{{ order.client }}</span>
                 </div>
-                <span class="customer-data">{{ order.client }}</span>
+                
               </div>
-              <span class="waiter-name">Atendente: {{ order.waiter }}</span>
+              <div class="customer-waiter">
+                <span>Atendente: </span>
+              <span class="waiter-name">{{ order.waiter }}</span>
+            </div>
               <div class="order-info">
                 <span class="order-label">Pedido</span>
-                <span class="order-label">/ Quant.</span>
+                <span class="order-label">Quant.</span>
               </div>
               <div *ngFor="let product of order.products" class="product-info">
                 <span class="order-data">{{ product.name }}</span>
@@ -82,10 +86,14 @@
             <div class="customer-info">
               <div class="customer-label">
                 <span>Cliente/Mesa:</span>
+                <span class="customer-data">{{ order.client }}</span>
               </div>
-              <span class="customer-data">{{ order.client }}</span>
+              
             </div>
-            <span class="waiter-name">Atendente: {{ order.waiter }}</span>
+            <div class="customer-waiter">
+              <span>Atendente: </span>
+            <span class="waiter-name">{{ order.waiter }}</span>
+          </div>
             <div class="order-info">
               <span class="order-label">Pedido</span>
               <span class="order-label">Quant.</span>
@@ -94,7 +102,10 @@
               <span class="order-data">{{ product.name }}</span>
               <span class="order-data quantity-data">{{ product.quantity }}</span>
             </div>
-            <span class="order-label">Concluído em: {{ order.completedDate }}</span>
+            <div class="order-label ready-container">
+              <span class="order-label ready">Concluído em: {{ order.completedDate }}</span>
+          </div>
+
           </section>
         </ng-template>
       </section>

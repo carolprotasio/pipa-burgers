@@ -8,13 +8,23 @@
 }
 
 /* Parte do chef */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+     
+    position: relative; 
+    z-index: 1; 
+  }
 .logoPb {    
     width: 300px;
-    position: absolute;
+    position: fixed;
     top: 10%; 
     left: 50%;
     transform: translateX(-50%);   
     z-index: 2;
+    margin-top: -100px;
 }
 
 main {
@@ -24,7 +34,7 @@ main {
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     padding-top: 5%;
 }
 
@@ -40,15 +50,6 @@ main::before {
     z-index: -1;
 }
 
-/* .mainSection {
-    margin-top: -150px; 
-    text-align: center;
-    display: flex; 
-    gap: 60px; 
-    flex-wrap: wrap; 
-    justify-content: center;
-    background-position: top;
-} */
 .mainSection {
     
     text-align: center;
@@ -68,8 +69,13 @@ main::before {
   }
 .btn-orders {
     display: flex;
-    flex-direction: row;
-    margin-top: 50px;
+   
+    align-items: center;
+    justify-content: center;
+    /* top: -200px; */
+    
+    position: relative; 
+    z-index: 1; 
 }
  .pendingOrders,.ReadyOrders {
     display: flex;
@@ -92,30 +98,26 @@ main::before {
     transition: background-color 0.2s, color 0.2s;
 } 
 
-/* Estilo para o botão "Pedidos pendentes" quando ativo */
-.pending-orders-btn.active {
-    background-color: #c92d2d;
-    color: white;
-}
-
-/* Estilo para o botão "Pedidos finalizados" quando ativo */
-.completed-orders-btn.active {
-    background-color: #c92d2d;
-    color: white;
-}
 
  .orders-container {
-    max-height: 70vh; 
+    max-height: 80vh; 
+    
     overflow-y: auto;
-    display: grid;
+    display: flex;    
+    overflow-x: auto;
+    
+    justify-content: center; 
+    align-content: flex-start;
+    
+    
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
-    margin-top: 40px;
+    margin-top: 10px;
     max-width: 1200px;
     width: 90%;
     justify-items: center;
     align-content: center;
-    margin-bottom: 100px;
+    margin-bottom: -150px;
     padding: 20px;
     margin-left: 25px;
     margin-top: 60px;
@@ -134,13 +136,15 @@ main::before {
     cursor: pointer;
     width: 100%;
 
+    flex: 0 0 calc(33.33% - 20px); /* Para 4 pedidos por linha */
+    margin: 10px;
+
     margin-right: 10px; 
     display: inline-block; 
     vertical-align: top; 
+
+    
 }
-/* .order-section:last-child {
-    margin-right: 0; /* Remove o espaço à direita do último pedido 
-  } */
 
 .order-section:hover {
     transform: scale(1.03);
@@ -153,10 +157,15 @@ main::before {
 
 .customer-info {
     margin-top: 10px;
+
 }
 
 .waiter-name {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 5px;
     font-style: italic;
+    
 }
 
 /* Estilos para a lista de produtos */
@@ -165,6 +174,19 @@ main::before {
     justify-content: space-between;
     margin-top: 5px;
 }
+.order-info {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 5px;
+}
+.customer-label, .customer-waiter {
+    display: flex;
+    justify-content: space-between; /* Espaço uniforme entre os itens */
+    margin-top: 5px;
+}
+.order-label.ready-container {
+    margin-top: 25px;
+}
 
 /* Estilos para o botão "Pronto" */
 .btn-ready-orders {
@@ -172,38 +194,43 @@ main::before {
     color: white;
     border: none;
     padding: 5px 10px;
-    border-radius: 3px;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+    width: 100px;
+    margin-top: 10px;    
 }
 
 .btn-ready-orders:hover {
     background-color: #0c500c; 
 }
 
-/* Estilos para o botão "Pedidos Pendentes" */
-.btn.pending-orders-btn.active {
+/* Estilos para o botão "Pedidos Pendentes" e "Pedidos Finalizados"*/
+.btn {
+    margin-top: 50px;  
     background-color: #981313;
     color: white;
 }
-
-.btn.pending-orders-btn.active:hover {
+.btn:hover {
     background-color: #c92d2d;
-}
-
-/* Estilos para o botão "Pedidos Finalizados" */
-.btn.completed-orders-btn.active {
-    background-color: #0d5e12;
     color: white;
 }
-
-.btn.completed-orders-btn.active:hover {
-    background-color: #c92d2d;
+.btn.pending-orders-btn.active {
+    background-color: #981313;
+    color: white;
+    margin-top: 50px;
 }
 
-.green {
-    background-color: rgba(97, 204, 97, 0.503);
+.pending-orders-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-content: flex-start; 
+    /* max-height: 100vh; */ 
+    
 }
+
+
 
 /*======================================================*/
 
@@ -304,8 +331,9 @@ ul li.item-list:hover {
     }
     
     .logoPb {
-        width: 200px;
-        margin-top: 8%;
+        display: none;
+        /* width: 200px;
+        margin-top: 8%; */
     }
     
     .mainText {

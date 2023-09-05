@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../services/auth/auth.service';
 
+
 interface Order {
   id: number;
   client: string;
@@ -77,12 +78,30 @@ export class ChefComponent implements OnInit {
         Authorization: `Bearer ${token}`,
       });
 
+   /*    const now = new Date();
+      const formattedDate = now.toISOString();
       const updatedOrder = {
         ...order,
         status: 'ready',
-        completedDate: new Date().toLocaleDateString(),
+        completedDate: formattedDate,
+      };  */
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      
+      
+      const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+      
+      const updatedOrder = {
+        ...order,
+        status: 'ready',
+        completedDate: formattedDate,
       };
-
+       
+     
       this.http
         .patch<any>(`http://localhost:8080/orders/${order.id}`, updatedOrder, {
           headers,
@@ -90,7 +109,7 @@ export class ChefComponent implements OnInit {
         .subscribe(
           () => {
             console.log('Pedido marcado como pronto.');
-            // Recarregue a lista de pedidos após marcar como pronto.
+            
             this.loadOrders(this.showPendingOrders);
           },
           (error) => {
