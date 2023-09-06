@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../services/auth/auth.service';
+import { OrderService } from 'src/app/services/order/order.service';
 
 
 interface Order {
@@ -26,7 +27,8 @@ export class ChefComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private orderService: OrderService
   ) {}
 
   logout() {
@@ -38,17 +40,13 @@ export class ChefComponent implements OnInit {
   }
 
   loadOrders(isPending: boolean) {
-    console.log('loadOrders called with isPending:', isPending);
+   
     this.showPendingOrders = isPending;
-    const token = localStorage.getItem('token');
+   
 
-    if (token) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      });
-
-      this.http
-        .get<Order[]>('http://localhost:8080/orders', { headers })
+    
+      this.orderService
+       .getOrders()
         .subscribe(
           (response) => {
             console.log('Response from server:', response);
@@ -65,59 +63,20 @@ export class ChefComponent implements OnInit {
             console.error('Erro ao buscar pedidos', error);
           }
         );
-    } else {
-      console.error('Token de autenticação não encontrado.');
-    }
+   
   }
 
   markOrderAsReady(order: Order) {
-    const token = localStorage.getItem('token');
 
-    if (token) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      });
-
-   /*    const now = new Date();
-      const formattedDate = now.toISOString();
-      const updatedOrder = {
-        ...order,
-        status: 'ready',
-        completedDate: formattedDate,
-      };  */
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      
-      
-      const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
-      
-      const updatedOrder = {
-        ...order,
-        status: 'ready',
-        completedDate: formattedDate,
-      };
-       
-     
-      this.http
-        .patch<any>(`http://localhost:8080/orders/${order.id}`, updatedOrder, {
-          headers,
-        })
-        .subscribe(
-          () => {
-            console.log('Pedido marcado como pronto.');
-            
-            this.loadOrders(this.showPendingOrders);
-          },
-          (error) => {
-            console.error('Erro ao marcar pedido como pronto', error);
-          }
-        );
-    } else {
-      console.error('Token de autenticação não encontrado.');
-    }
+    this.orderService.updateOrder(order, 'ready').subscribe( 
+      ()=> {
+        console.log('Order updated');
+        this.loadOrders(true);
+      },
+      (error) => {
+        console.error(error)
+      }  
+    )
+    
   }
 }

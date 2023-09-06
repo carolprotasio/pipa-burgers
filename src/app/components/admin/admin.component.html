@@ -1,4 +1,4 @@
-<p>admin works!</p>
+<!-- <p>admin works!</p> -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <nav class="menu-lateral">
     <div>
@@ -29,3 +29,21 @@
         </li>
     </ul>
 </nav> 
+<main class="admin-container flexbox-column">
+    <div class="header-container">
+        <img src="../../../assets/logoPB.png" alt="Logo" class="logoPb">
+      </div>
+    <div class="menu flexbox boxshadow">
+      <button (click)="showEmployees()" [ngClass]="{'active': activeComponent === 'users'}" class="btn-users">Funcionários</button>
+      <button (click)="showProducts()" [ngClass]="{'active': activeComponent === 'products'}" class="btn-producs">Produtos</button>
+    </div>
+  
+    <div *ngIf="activeComponent === 'users'">
+      <app-user-form></app-user-form>
+    </div>
+  
+    <div *ngIf="activeComponent === 'products'">
+     <app-product-form></app-product-form>
+    </div>
+  
+</main>

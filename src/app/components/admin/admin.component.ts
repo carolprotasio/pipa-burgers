@@ -8,7 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent {
+  activeComponent: string = 'users';
+  
+  showEmployees() {
+    this.activeComponent = 'users';
+  }
 
+  showProducts() {
+    this.activeComponent = 'products';
+  }
 
   constructor(private router: Router, private authService: AuthService) {}
 
