@@ -1,66 +1,87 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+interface Order {
+  id: number;
+  client: string;
+  table: string;
+  waiter: string;
+  status: string;
+  completedDate: string;
+  orderDelivered: string;
+  products: { name: string; quantity: number }[];
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
+  private readonly URL = "http://localhost:8080/orders"
 
-  private addedProducts: any[] = [];
-  public productQuantities: { [productId: number]: number} = {};
-  private addedProductSubject = new BehaviorSubject<any>(null);
-  public productQuantitiesSubject = new BehaviorSubject<{[productId: number]: number}>({});
-  addedProduct$ = this.addedProductSubject.asObservable();
-  productQuantities$ = this.productQuantitiesSubject.asObservable();
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router
+  ) {
 
-  addProduct(product: any) {
-    const productId = product.id;
-    if (this.addedProducts[productId]){
-      this.addedProducts[productId].quantity++;
-    } else {
-      this.addedProducts[productId] = { product, quantity: 1 };
+  }
+
+  private authenticate(): string | null { 
+    const token: string | null = localStorage.getItem('token');
+    return token      
+
+  }
+
+  updateOrder(order: any, newStatus: string): Observable<any> {
+    const token = this.authenticate()
+
+    if(!token){
+      this.router.navigate(['/'])
+
     }
-    this.updateProductQuantities();
-    this.addedProductSubject.next(this.addedProducts);
-  }
 
-  getAddedProducts(){
-    return Object.values(this.addedProducts);
-  }
-
-  setProductQuantities(quantities: {[productId: number]: number}){
-    this.productQuantities = quantities;
-  }
-
-  getProductQuantities() {
-    return this.productQuantities;
-  }
-
-  removeProduct(productId: number) {
-    if (this.addedProducts[productId]) {
-      if (this.addedProducts[productId].quantity > 1) {
-        this.addedProducts[productId].quantity--;
-      } else {
-        delete this.addedProducts[productId];
-      }
-      this.addedProductSubject.next(this.addedProducts);
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    
+    let updatedOrder = {
+      ...order,
+      status: newStatus,
+      
+    }; 
+    if(newStatus === 'ready'){
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+      updatedOrder.completedDate = formattedDate;
     }
-  }
+    return this.http.patch<any>(`${this.URL}/${order.id}`, updatedOrder, { headers })
 
-  deleteProduct(productId: number) {
-    if (this.addedProducts[productId]) {
-      delete this.addedProducts[productId];
-      this.updateProductQuantities();
-      this.addedProductSubject.next(this.addedProducts);
+  }
+  getOrders() {
+    const token = this.authenticate()
+
+    if(!token){
+      this.router.navigate(['/'])
+
     }
-  }
 
-  updateProductQuantities() {
-    const quantities: {[productIs: number]: number} = {};
-    for (const addedProduct of Object.values(this.addedProducts)) {
-      quantities[addedProduct.product.id] = addedProduct.quantity;
-    }
-    this.productQuantitiesSubject.next(quantities);
-  }
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
 
+    
+      return this.http
+        .get<Order[]>(`${this.URL}`, { headers })
+       
+    
+  }
+  
 }

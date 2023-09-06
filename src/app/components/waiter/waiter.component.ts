@@ -70,5 +70,41 @@ export class WaiterComponent {
     this.router.navigate(['/login']); 
   }
 
+  /* loadOrders(isPending: boolean) {
+   
+    this.showPendingOrders = isPending;
+   
 
+    
+      this.orderService
+       .getOrders()
+        .subscribe(
+          (response) => {
+            
+            this.completedOrders = response.filter(
+              (order: Order) => order.status === 'ready'
+            );
+            console.log('Pending Orders:', this.pendingOrders);
+            console.log('Completed Orders:', this.completedOrders);
+          },
+          (error) => {
+            console.error('Erro ao buscar pedidos', error);
+          }
+        );
+
+        markOrderAsReady(order: Order) {
+
+    this.orderService.updateOrder(order, 'completed').subscribe( 
+      ()=> {
+        console.log('Order updated');
+        this.loadOrders(true);
+      },
+      (error) => {
+        console.error(error)
+      }  
+    )
+    
+  }
+   
+ */
 }

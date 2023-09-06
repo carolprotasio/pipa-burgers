@@ -1,0 +1,72 @@
+ <section class="container">
+    <select [(ngModel)]="selectedList" (change)="onViewChange()" id="selectUser">
+      <option value="Escolha um filtro" selected disabled>Escolha um filtro</option>
+      <option value="list">Lista de Funcionários</option>
+      <option value="register">Cadastrar Funcionário</option>
+    </select>
+  
+    <section *ngIf="selectedList === 'list'" class= "dataUser">
+      <div *ngFor="let user of users" class="employee-item flexbox-column boxshadow">
+        <div class="div-data-user">
+          <span>Id:</span>
+          <span class="user-data"> {{user.id}} </span>
+        </div>
+        <div class="dataUser">
+          <span>Nome:</span>
+          <input [(ngModel)]="user.name" *ngIf="!user.editing" [readonly]="user.editing" disabled type="text" class="user-data">
+          <input [(ngModel)]="user.name" *ngIf="user.editing" class="user-edit" type="text">
+        </div>
+        <div class="dataUser">
+          <span>Email:</span>
+          <input [(ngModel)]="user.email" *ngIf="!user.editing" [readonly]="user.editing" disabled class="user-data" type="text">
+          <input [(ngModel)]="user.email" *ngIf="user.editing" class="user-edit">
+        </div>
+        <div class="dataUser">
+          <span>Cargo:</span>
+          <input [(ngModel)]="user.role" *ngIf="!user.editing" [readonly]="user.editing" disabled class="user-data" type="text">
+          <input [(ngModel)]="user.role" *ngIf="user.editing" class="user-edit">
+        </div>
+        <div *ngIf="!user.editing" class="edit-delete-icons flexbox">
+          <img (click)="toggleEdit(user)" src="../../../assets/edit-icon.svg" alt="edit icon">
+          <img (click)="deleteUserConfirmation(user)" src="../../../assets/icon-trash.svg" alt="delete icon">
+        </div>
+        <div *ngIf="user.editing" class="edit-delete-icons flexbox">
+          <button *ngIf="user.editing" (click)="updateUsersData(user)" class="save-btn">Salvar</button>
+          <button *ngIf="user.editing" (click)="cancelEdit(user)" class="cancel-btn" >Cancelar</button>
+        </div>
+        <div *ngIf="user.showConfirmation" class="confirmation-box flexbox-column boxshadow">
+          <p>Tem certeza que deseja excluir o usuário {{user.name}}?</p>
+          <div class="btns flexbox">
+            <button (click)="deleteUser(user)" class="save-btn">Confirmar</button>
+            <button (click)="cancelDeleteConfirmation(user)" class="cancel-btn">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section *ngIf="selectedList === 'register'" class="employee-register flexbox-column">
+      <form (ngSubmit)="registerUsers()">
+        <div class="input-icon-container flexbox">
+          <img src="../../../assets/user.svg" alt="user icon">
+          <input [(ngModel)]="employeeData.name" type="text" id="name-input" name="name" placeholder="Insira o nome do funcionário">
+        </div>
+        <div class="input-icon-container flexbox">
+          <img src="../../../assets/icon-email.svg" alt="user icon">
+          <input [(ngModel)]="employeeData.email" type="email" id="email-input" name="email" placeholder="Insira o email do funcionário">
+        </div>
+        <div class="input-icon-container flexbox">
+          <img src="../../../assets/password.svg" alt="user icon">
+          <input [(ngModel)]="employeeData.password" type="password" id="pass-input" name="password" placeholder="Insira a senha">
+        </div>
+      </form>
+      <div class="flexbox-column">
+        <span class="select-the-position">Selecione o cargo:</span>
+        <div class="employee-position flexbox">
+          <span (click)="selectedPosition = 'waiter'" [ngClass]="{'employee-position-active': selectedPosition === 'waiter'}" class="span-role">Waiter</span>
+          <span (click)="selectedPosition = 'chef'" [ngClass]="{'employee-position-active': selectedPosition === 'chef'}" class="span-role">Chef</span>
+          <span (click)="selectedPosition = 'admin'" [ngClass]="{'employee-position-active': selectedPosition === 'admin'}" class="span-role">Admin</span>
+        </div>
+      </div>
+      <button (click)="registerUsers()" type="submit" class="btn-register">Criar Cadastro</button>
+    </section>
+  </section> 
